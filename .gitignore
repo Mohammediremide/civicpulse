@@ -27,3 +27,7 @@ dist-ssr
 .env
 .env.local
 .env.*.local
+
+# Neon CLI local config (if you ran `neonctl init` locally)
+.neon
+.neonctl

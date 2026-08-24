@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Suspense, lazy } from 'react'
-import { AuthProvider } from './hooks/useAuth'
+import { Suspense, lazy, useState, useEffect } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { AuthProvider, useAuth } from './hooks/useAuth'
+import SplashScreen from './components/SplashScreen'
 
 import PublicLayout from './layouts/PublicLayout'
 import CitizenLayout from './layouts/CitizenLayout'
@@ -52,6 +54,35 @@ function LazyFallback() {
 export default function App() {
   return (
     <AuthProvider>
+      <AppShell />
+    </AuthProvider>
+  )
+}
+
+function AppShell() {
+  const { initializing } = useAuth()
+  const [minTimeElapsed, setMinTimeElapsed] = useState(false)
+
+  useEffect(() => {
+    const t = setTimeout(() => setMinTimeElapsed(true), 900)
+    return () => clearTimeout(t)
+  }, [])
+
+  const showSplash = initializing || !minTimeElapsed
+
+  return (
+    <>
+      <AnimatePresence>
+        {showSplash && (
+          <motion.div
+            key="splash"
+            exit={{ opacity: 0, transition: { duration: 0.4, ease: 'easeInOut' } }}
+          >
+            <SplashScreen />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <BrowserRouter>
         <Routes>
           {/* Public site */}
@@ -99,6 +130,6 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
-    </AuthProvider>
+    </>
   )
 }
