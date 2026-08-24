@@ -1,6 +1,6 @@
-import { prisma } from '../_lib/prisma.js'
-import { getSessionFromRequest, sendError } from '../_lib/auth.js'
-import { classifyComplaint, nextReferenceId } from '../_lib/taxonomy.js'
+import { prisma } from '../../lib/prisma.js'
+import { getSessionFromRequest, sendError } from '../../lib/auth.js'
+import { classifyComplaint, nextReferenceId } from '../../lib/taxonomy.js'
 
 const PUBLIC_SELECT = {
   id: true, referenceId: true, title: true, description: true, typeId: true,

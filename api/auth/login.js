@@ -1,5 +1,5 @@
-import { prisma } from '../_lib/prisma.js'
-import { comparePassword, signToken, sendError } from '../_lib/auth.js'
+import { prisma } from '../../lib/prisma.js'
+import { comparePassword, signToken, sendError } from '../../lib/auth.js'
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return sendError(res, 405, 'Method not allowed')

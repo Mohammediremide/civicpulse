@@ -1,4 +1,4 @@
-import { sendError } from './_lib/auth.js'
+import { sendError } from '../lib/auth.js'
 
 const GEOAPIFY_KEY = process.env.GEOAPIFY_API_KEY
 

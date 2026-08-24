@@ -1,5 +1,5 @@
-import { prisma } from '../_lib/prisma.js'
-import { getSessionFromRequest, sendError } from '../_lib/auth.js'
+import { prisma } from '../../lib/prisma.js'
+import { getSessionFromRequest, sendError } from '../../lib/auth.js'
 
 const FULL_SELECT = {
   id: true, referenceId: true, title: true, description: true, typeId: true,

@@ -1,5 +1,5 @@
-import { prisma } from '../_lib/prisma.js'
-import { sendError } from '../_lib/auth.js'
+import { prisma } from '../lib/prisma.js'
+import { sendError } from '../lib/auth.js'
 
 const RESOLVED = ['Resolved', 'Closed']
 
