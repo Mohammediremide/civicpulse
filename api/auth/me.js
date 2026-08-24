@@ -12,6 +12,6 @@ export default async function handler(req, res) {
   if (user.suspended) return sendError(res, 403, 'This account has been suspended.')
 
   return res.status(200).json({
-    user: { id: user.id, fullName: user.fullName, email: user.email, role: user.role },
+    user: { id: user.id, fullName: user.fullName, email: user.email, phone: user.phone, role: user.role },
   })
 }

@@ -23,8 +23,14 @@ export default function Login() {
     setSubmitting(true)
     try {
       const session = await login({ email, password, remember })
-      const dest = location.state?.from || (session.role === 'administrator' ? '/admin' : '/dashboard')
-      navigate(dest)
+      const isStaff = ['administrator', 'government_staff', 'department_manager'].includes(session.role)
+      const roleHome = isStaff ? '/admin' : '/dashboard'
+      const from = location.state?.from
+      // Only honor the "came from" redirect if it actually belongs to this
+      // role — otherwise a citizen's stale redirect could send an admin
+      // login back to the citizen dashboard, or vice versa.
+      const fromMatchesRole = from && (isStaff ? from.startsWith('/admin') : !from.startsWith('/admin'))
+      navigate(fromMatchesRole ? from : roleHome)
     } catch (err) {
       setError(err.message)
     } finally {

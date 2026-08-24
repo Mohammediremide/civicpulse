@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Search, UserPlus, ShieldOff, ShieldCheck, X } from 'lucide-react'
+import { Search, UserPlus, ShieldOff, ShieldCheck, X, Lock } from 'lucide-react'
 import Button from '../../components/Button'
 import ErrorState from '../../components/ErrorState'
+import EmptyState from '../../components/EmptyState'
 import { SkeletonTableRow } from '../../components/Skeleton'
 import { listUsers, createUser, suspendUser, reactivateUser, changeUserRole } from '../../services/userService'
 import { useAuth } from '../../hooks/useAuth'
@@ -22,7 +23,20 @@ const ROLE_COLOR = {
 }
 
 export default function AdminUsers() {
-  const { session } = useAuth()
+  const { session, isAdmin } = useAuth()
+
+  if (!isAdmin) {
+    return (
+      <div className="mx-auto max-w-md py-16">
+        <EmptyState icon={Lock} title="Administrators only" description="User management is restricted to full administrators. Contact one if you need a role changed or an account suspended." />
+      </div>
+    )
+  }
+
+  return <UsersManager session={session} />
+}
+
+function UsersManager({ session }) {
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -102,7 +116,8 @@ export default function AdminUsers() {
         ) : error ? (
           <div className="p-6"><ErrorState description={error} onRetry={load} /></div>
         ) : (
-          <table className="w-full text-sm">
+          <div className="overflow-x-auto">
+          <table className="w-full min-w-[720px] text-sm">
             <thead>
               <tr className="border-b border-mist-200 text-left text-xs uppercase tracking-wide text-slate-400">
                 <th className="px-4 py-3 font-medium">Name</th>
@@ -150,6 +165,7 @@ export default function AdminUsers() {
               )}
             </tbody>
           </table>
+          </div>
         )}
       </div>
 

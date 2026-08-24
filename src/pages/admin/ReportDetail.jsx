@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft, ShieldCheck, Flag, MessageSquarePlus, CheckCircle2, Lock, FileText, Image as ImageIcon, Video } from 'lucide-react'
 import { useReport } from '../../hooks/useReports'
 import {
   verifyReport, assignDepartment, changePriority, changeStatus, addUpdateNote,
 } from '../../services/reportService'
+import { listDepartments } from '../../services/directoryService'
 import { StatusBadge, PriorityBadge, TypeBadge } from '../../components/Badge'
 import ReportTimeline from '../../features/complaints/ReportTimeline'
 import DemoMap from '../../components/DemoMap'
@@ -13,7 +14,7 @@ import ErrorState from '../../components/ErrorState'
 import Button from '../../components/Button'
 import { SkeletonBlock } from '../../components/Skeleton'
 import { formatDate } from '../../utils/status'
-import { DEPARTMENTS, STATUS_FLOW, PRIORITIES } from '../../data/taxonomy'
+import { STATUS_FLOW, PRIORITIES } from '../../data/taxonomy'
 
 export default function AdminReportDetail() {
   const { id } = useParams()
@@ -21,6 +22,11 @@ export default function AdminReportDetail() {
   const [note, setNote] = useState('')
   const [toast, setToast] = useState('')
   const [busy, setBusy] = useState(false)
+  const [departments, setDepartments] = useState([])
+
+  useEffect(() => {
+    listDepartments().then(setDepartments).catch(() => {})
+  }, [])
 
   if (loading) {
     return (
@@ -149,7 +155,7 @@ export default function AdminReportDetail() {
                 <label className="mb-1.5 block text-xs font-medium text-slate-500">Assign Department</label>
                 <select onChange={(e) => e.target.value && assign(e.target.value)} defaultValue="" disabled={busy} className="w-full rounded-xl border border-mist-200 px-3 py-2.5 text-sm focus-visible:border-teal-500">
                   <option value="" disabled>Select department…</option>
-                  {DEPARTMENTS.map((d) => <option key={d.id} value={d.name}>{d.name}</option>)}
+                  {departments.map((d) => <option key={d.id} value={d.name}>{d.name}</option>)}
                 </select>
               </div>
 

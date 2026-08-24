@@ -1,5 +1,5 @@
 // Real auth service — talks to the /api/auth serverless functions backed by
-// Postgres. Replaces the old localStorage-only demo implementation.
+// Postgres.
 import { apiFetch, setToken, getToken } from './apiClient'
 
 const USER_KEY = 'civicpulse_user'
@@ -21,10 +21,16 @@ export async function login({ email, password }) {
 }
 
 export async function requestPasswordReset(email) {
-  // Not yet backed by a real email service — kept as a clearly-labeled demo
-  // step in the UI (see ForgotPassword.jsx copy).
+  // Not yet backed by a real email service — kept as a clearly-labeled step
+  // in the UI (see ForgotPassword.jsx copy).
   await new Promise((r) => setTimeout(r, 500))
   return { requested: true, email }
+}
+
+export async function updateProfile(patch) {
+  const data = await apiFetch('/api/auth/profile', { method: 'PATCH', body: patch })
+  localStorage.setItem(USER_KEY, JSON.stringify(data.user))
+  return data.user
 }
 
 export function getSession() {

@@ -92,3 +92,17 @@ model TimelineEntry {
   reportId String
   report   Report @relation(fields: [reportId], references: [id], onDelete: Cascade)
 }
+
+model Department {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  lead      String?
+  createdAt DateTime @default(now())
+}
+
+model Organization {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  type      String
+  createdAt DateTime @default(now())
+}

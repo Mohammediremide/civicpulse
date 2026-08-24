@@ -13,7 +13,8 @@
     "db:migrate": "prisma migrate dev",
     "db:seed": "prisma db seed",
     "db:studio": "prisma studio",
-    "db:clear-reports": "node prisma/clear-reports.js"
+    "db:clear-reports": "node prisma/clear-reports.js",
+    "db:seed-directory": "node prisma/seed-directory.js"
   },
   "prisma": {
     "seed": "node prisma/seed.js"

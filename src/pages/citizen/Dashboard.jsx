@@ -8,18 +8,17 @@ import { useAuth } from '../../hooks/useAuth'
 import { useReports } from '../../hooks/useReports'
 import { SkeletonCard, SkeletonLine } from '../../components/Skeleton'
 import ErrorState from '../../components/ErrorState'
-import { formatDate } from '../../utils/status'
-
-const NOTIFS = [
-  { text: 'Your complaint CIV-2026-004821 has been verified.', time: '2h ago' },
-  { text: 'Your complaint CIV-2026-004617 has been resolved.', time: '1d ago' },
-  { text: 'Your complaint CIV-2026-004512 is now under review.', time: '3d ago' },
-]
+import { formatDate, timeAgo } from '../../utils/status'
 
 export default function CitizenDashboard() {
   const { session } = useAuth()
   const { reports: all, loading, error, refetch } = useReports({ pageSize: 8 })
   const reports = all
+
+  const recentUpdates = reports
+    .flatMap((r) => (r.timeline || []).map((t) => ({ ...t, referenceId: r.referenceId })))
+    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+    .slice(0, 5)
 
   const stats = useMemo(() => {
     const submitted = reports.length
@@ -81,12 +80,15 @@ export default function CitizenDashboard() {
             <Bell className="h-4 w-4 text-slate-400" />
           </div>
           <div className="mt-4 space-y-4">
-            {NOTIFS.map((n, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }} className="flex gap-3">
+            {recentUpdates.length === 0 && !loading && (
+              <p className="text-sm text-slate-400">No updates yet — they'll show up here as your reports move through review.</p>
+            )}
+            {recentUpdates.map((n, i) => (
+              <motion.div key={n.id ?? i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }} className="flex gap-3">
                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-500" />
                 <div>
-                  <p className="text-sm text-ink-900">{n.text}</p>
-                  <p className="mt-0.5 text-xs text-slate-400">{n.time}</p>
+                  <p className="text-sm text-ink-900">{n.referenceId}: {n.note}</p>
+                  <p className="mt-0.5 text-xs text-slate-400">{timeAgo(n.timestamp)}</p>
                 </div>
               </motion.div>
             ))}

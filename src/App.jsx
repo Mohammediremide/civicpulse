@@ -112,7 +112,7 @@ function AppShell() {
           </Route>
 
           {/* Admin console */}
-          <Route element={<ProtectedRoute requireAdmin><AdminLayout /></ProtectedRoute>}>
+          <Route element={<ProtectedRoute requireStaff><AdminLayout /></ProtectedRoute>}>
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/reports" element={<AdminReports />} />
             <Route path="/admin/reports/:id" element={<AdminReportDetail />} />

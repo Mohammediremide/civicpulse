@@ -44,8 +44,14 @@ export function AuthProvider({ children }) {
     setSession(null)
   }, [])
 
+  const updateProfile = useCallback(async (patch) => {
+    const user = await authService.updateProfile(patch)
+    setSession(user)
+    return user
+  }, [])
+
   return (
-    <AuthContext.Provider value={{ session, loading, initializing, login, signup, logout, isAdmin: session?.role === 'administrator' }}>
+    <AuthContext.Provider value={{ session, loading, initializing, login, signup, logout, updateProfile, isAdmin: session?.role === 'administrator' }}>
       {children}
     </AuthContext.Provider>
   )
