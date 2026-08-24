@@ -97,9 +97,6 @@ export default function AdminLayout() {
             <Menu className="h-5 w-5" />
           </button>
           <span className="font-display text-sm font-semibold text-ink-900">Government Operations Console</span>
-          <span className="ml-auto hidden items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-status-warning sm:flex">
-            Demo Environment
-          </span>
         </header>
         <main className="px-4 py-6 lg:px-8 lg:py-8">
           <Outlet />

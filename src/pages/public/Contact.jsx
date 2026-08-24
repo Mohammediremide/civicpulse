@@ -36,7 +36,7 @@ export default function Contact() {
                   <CheckCircle2 className="h-6 w-6" />
                 </div>
                 <h3 className="font-display text-lg font-semibold text-ink-900">Message received</h3>
-                <p className="mt-2 max-w-sm text-sm text-slate-500">This is a demo form for the prototype — no message was actually sent.</p>
+                <p className="mt-2 max-w-sm text-sm text-slate-500">Message submission isn't wired to an inbox yet — nothing was sent.</p>
               </div>
             ) : (
               <form onSubmit={onSubmit} className="space-y-5">

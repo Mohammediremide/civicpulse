@@ -87,7 +87,7 @@ export default function ReportDetail() {
           </div>
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-400">Reporter</h3>
-            <p className="mt-1.5 text-sm text-ink-900">{report.reporterDisplayName ?? 'Demo Citizen'} <span className="text-slate-400">(private details withheld)</span></p>
+            <p className="mt-1.5 text-sm text-ink-900">{report.reporterDisplayName ?? 'Citizen'} <span className="text-slate-400">(private details withheld)</span></p>
           </div>
         </div>
 
@@ -115,7 +115,7 @@ export default function ReportDetail() {
 
         {duplicates.length > 0 && (
           <div className="mt-6 rounded-xl bg-amber-50 p-4 text-sm text-status-warning">
-            {duplicates.length} similar report{duplicates.length > 1 ? 's' : ''} detected within 1.2 km — demo duplicate-detection logic.
+            {duplicates.length} similar report{duplicates.length > 1 ? 's' : ''} detected within 1.2 km.
           </div>
         )}
 

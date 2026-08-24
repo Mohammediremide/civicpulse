@@ -39,9 +39,6 @@ export default function Track() {
           <Button type="submit" iconRight={ArrowRight} loading={loading}>Track</Button>
         </form>
 
-        <button onClick={() => setRef('CIV-2026-004821')} className="mt-3 text-xs text-slate-400 hover:text-teal-600">
-          Try demo reference: CIV-2026-004821
-        </button>
       </div>
 
       {searched && (

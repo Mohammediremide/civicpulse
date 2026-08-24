@@ -84,7 +84,7 @@ async function handleCreate(req, res) {
         organization: classification.organization,
         evidence: evidence || [],
         reporterId: session?.id ?? null,
-        reporterDisplayName: reporterName || 'Demo Citizen',
+        reporterDisplayName: reporterName || 'Citizen',
         timeline: { create: [{ status: 'Submitted', note: 'Report submitted by citizen.' }] },
       },
       select: PUBLIC_SELECT,

@@ -16,7 +16,7 @@ export default function AdminOrganizations() {
 
       <div className="mt-4 flex items-start gap-2 rounded-xl bg-amber-50 p-3.5 text-xs text-status-warning">
         <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0" />
-        Organizations are not publicly labeled based on unverified complaints alone. Figures below reflect demo moderation logic.
+        Organizations are not publicly labeled based on unverified complaints alone. Figures below are illustrative pending real per-organization tracking.
       </div>
 
       <div className="mt-6 overflow-hidden rounded-2xl border border-mist-200 bg-white">

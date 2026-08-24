@@ -136,7 +136,7 @@ function generateReports(count = 64) {
       timeline: buildTimeline(status, baseDate),
       reporter: {
         // demo-only, not a real citizen
-        displayName: 'Demo Citizen',
+        displayName: 'Citizen',
       },
     })
   }

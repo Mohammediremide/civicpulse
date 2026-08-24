@@ -262,7 +262,7 @@ function StepEvidence({ form, setForm }) {
       <label className="mt-5 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-mist-300 bg-mist-50 py-10 text-center hover:border-teal-400">
         <Upload className="h-6 w-6 text-slate-400" />
         <span className="text-sm font-medium text-ink-900">Click to upload files</span>
-        <span className="text-xs text-slate-400">Demo upload — files stay on your device</span>
+        <span className="text-xs text-slate-400">File names are tracked; uploaded files are not yet stored</span>
         <input type="file" multiple className="hidden" onChange={onFiles} />
       </label>
       {form.evidence.length > 0 && (
@@ -298,7 +298,7 @@ function StepReview({ form }) {
         <ReviewRow label="Evidence" value={form.evidence.length ? `${form.evidence.length} file(s) attached` : 'None attached'} />
         {classification.suggestion && <ReviewRow label="Suggested Authority" value={classification.suggestion.name} />}
       </div>
-      <p className="mt-4 text-xs text-slate-400">By submitting, you confirm this report reflects a real issue to the best of your knowledge. This is a demo submission and is stored only in your browser.</p>
+      <p className="mt-4 text-xs text-slate-400">By submitting, you confirm this report reflects a real issue to the best of your knowledge.</p>
     </div>
   )
 }

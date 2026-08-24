@@ -9,6 +9,7 @@ export default async function handler(req, res) {
 
   const user = await prisma.user.findUnique({ where: { id: session.id } })
   if (!user) return sendError(res, 401, 'Session is no longer valid.')
+  if (user.suspended) return sendError(res, 403, 'This account has been suspended.')
 
   return res.status(200).json({
     user: { id: user.id, fullName: user.fullName, email: user.email, role: user.role },

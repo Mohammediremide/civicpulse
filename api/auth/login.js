@@ -14,6 +14,10 @@ export default async function handler(req, res) {
     const valid = await comparePassword(password, user.passwordHash)
     if (!valid) return sendError(res, 401, 'Incorrect password.')
 
+    if (user.suspended) {
+      return sendError(res, 403, 'This account has been suspended. Contact an administrator.')
+    }
+
     const token = signToken({ id: user.id, role: user.role })
     return res.status(200).json({
       token,

@@ -58,10 +58,7 @@ export default function Landing() {
               <Button as={Link} to="/report" size="lg" iconRight={ChevronRight}>Report an Issue</Button>
               <Button as={Link} to="/community" variant="outline-light" size="lg">Explore the Platform</Button>
             </motion.div>
-            <motion.p variants={fadeUp} className="mt-6 text-xs text-slate-500">
-              Demo/prototype platform · No real citizen data · Not connected to government systems
-            </motion.p>
-          </motion.div>
+                      </motion.div>
 
           <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, ease: 'easeOut', delay: 0.15 }}>
             <HeroMap />
@@ -144,14 +141,14 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* CLASSIFIER DEMO */}
+      {/* CLASSIFIER SECTION */}
       <section className="mx-auto max-w-7xl px-5 py-24 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           <div>
             <span className="text-xs font-semibold uppercase tracking-widest text-teal-600">Who Should Handle My Complaint?</span>
             <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl">You don't need to know the system. We route it for you.</h2>
             <p className="mt-4 max-w-lg text-sm leading-relaxed text-slate-500">
-              Describe your problem in plain language. CivicPulse suggests the category and the department or organization workflow best suited to handle it — using demo rule-based logic for this prototype, architected so a real classification service can be connected later.
+              Describe your problem in plain language. CivicPulse suggests the category and the department or organization workflow best suited to handle it — using rule-based keyword matching, architected so a real AI classification service can be added later.
             </p>
           </div>
           <ClassifierDemo />

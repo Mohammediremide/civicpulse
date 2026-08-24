@@ -40,10 +40,6 @@ export default function Login() {
           <Radar className="h-10 w-10 text-teal-400" />
           <h2 className="mt-6 font-display text-3xl font-semibold text-white">Welcome back to CivicPulse.</h2>
           <p className="mt-4 max-w-sm text-sm text-slate-300">Check on your reports, submit new ones, and see what's changing in your community.</p>
-          <div className="mt-10 rounded-2xl border border-white/10 bg-white/5 p-4 font-mono text-xs text-slate-400">
-            Demo admin access <br />
-            <span className="text-teal-400">admin@civicpulse.ng</span> / <span className="text-teal-400">demo1234</span>
-          </div>
         </div>
       </div>
 

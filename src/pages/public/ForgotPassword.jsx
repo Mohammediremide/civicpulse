@@ -28,7 +28,7 @@ export default function ForgotPassword() {
           {!sent ? (
             <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               <h1 className="font-display text-2xl font-semibold text-ink-900">Reset your password</h1>
-              <p className="mt-2 text-sm text-slate-500">Enter the email associated with your account. This is a demo interface — no email is actually sent in this prototype.</p>
+              <p className="mt-2 text-sm text-slate-500">Enter the email associated with your account. Email delivery isn't connected yet, so no message will be sent for now.</p>
 
               <form onSubmit={onSubmit} className="mt-6 space-y-5">
                 <label className="block">
@@ -43,7 +43,7 @@ export default function ForgotPassword() {
               <div className="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-full bg-teal-50 text-teal-600">
                 <MailCheck className="h-6 w-6" />
               </div>
-              <h1 className="font-display text-xl font-semibold text-ink-900">Demo request received</h1>
+              <h1 className="font-display text-xl font-semibold text-ink-900">Request received</h1>
               <p className="mt-2 text-sm text-slate-500">In a production deployment, reset instructions would be sent to <span className="font-medium text-ink-900">{email}</span>. No email service is connected in this prototype.</p>
             </motion.div>
           )}

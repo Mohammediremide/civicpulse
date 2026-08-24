@@ -44,7 +44,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} CivicPulse. A civic-technology prototype. All data shown is demo data.</p>
+          <p>© {new Date().getFullYear()} CivicPulse. A civic-technology platform for Nigeria.</p>
           <p>Built for transparent, accountable communities across Nigeria.</p>
         </div>
       </div>

@@ -33,7 +33,7 @@ export default function AdminDashboard() {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="font-display text-2xl font-semibold text-ink-900">Government Operations Overview</h1>
-          <p className="mt-1 text-sm text-slate-500">Demo data · Not connected to a real government database</p>
+          <p className="mt-1 text-sm text-slate-500">Not connected to a real government database or verification system</p>
         </div>
         <Link to="/admin/reports" className="inline-flex items-center gap-1.5 text-sm font-medium text-teal-600 hover:text-teal-700">
           Review all reports <ArrowRight className="h-4 w-4" />

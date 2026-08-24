@@ -85,7 +85,7 @@ async function main() {
         department: sample.department || null,
         organization: sample.organization || null,
         evidence: [],
-        reporterDisplayName: 'Demo Citizen',
+        reporterDisplayName: 'Citizen',
         createdAt,
         updatedAt: createdAt,
         timeline: { create: [{ status: sample.status, note: 'Seeded demo status.', timestamp: createdAt }] },

@@ -15,7 +15,7 @@ export default function About() {
         <span className="text-xs font-semibold uppercase tracking-widest text-teal-600">About CivicPulse</span>
         <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl">Building the civic infrastructure Nigeria's communities deserve</h1>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-500">
-          CivicPulse is a prototype platform designed to unify three things that usually live in separate, disconnected systems: community problems, government service issues, and consumer complaints. Our long-term vision is a serious CivicTech platform that can work with government agencies, regulators, municipalities, and service providers through properly authorized integrations.
+          CivicPulse is a platform designed to unify three things that usually live in separate, disconnected systems: community problems, government service issues, and consumer complaints. Our long-term vision is a serious CivicTech platform that can work with government agencies, regulators, municipalities, and service providers through properly authorized integrations.
         </p>
       </section>
 
@@ -34,10 +34,9 @@ export default function About() {
       </section>
 
       <section className="mx-auto max-w-4xl px-5 py-16 lg:px-8">
-        <h2 className="font-display text-2xl font-semibold text-ink-900">An important note on this prototype</h2>
+        <h2 className="font-display text-2xl font-semibold text-ink-900">An important note on government affiliation</h2>
         <div className="mt-4 space-y-3 text-sm leading-relaxed text-slate-600">
-          <p>CivicPulse, as shown here, is an MVP demonstration. It does not use real citizen data, and it is not connected to any real government database or verification system.</p>
-          <p>All reports, statistics, and organizations shown throughout this platform are fictional demo data used to illustrate how the product would work in production.</p>
+          <p>CivicPulse is an independent civic-reporting platform. It is not affiliated with, verified by, or connected to any government database or agency.</p>
           <p>The architecture is intentionally built so that real authentication, storage, mapping, and classification services can be connected later, without redesigning the product.</p>
         </div>
       </section>

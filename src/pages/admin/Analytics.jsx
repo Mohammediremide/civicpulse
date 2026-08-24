@@ -74,7 +74,7 @@ export default function AdminAnalytics() {
     <div className="space-y-8">
       <div>
         <h1 className="font-display text-2xl font-semibold text-ink-900">Analytics</h1>
-        <p className="mt-1 text-sm text-slate-500">Demo analytics — trends and figures are illustrative.</p>
+        <p className="mt-1 text-sm text-slate-500">Trend charts below are illustrative; stat cards above reflect your real data.</p>
       </div>
 
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
@@ -203,7 +203,7 @@ export default function AdminAnalytics() {
             <div key={insight} className="rounded-xl border border-white/10 bg-white/5 p-4 text-sm text-slate-300">{insight}</div>
           ))}
         </div>
-        <p className="mt-4 text-xs text-slate-500">Demo insights — architected for a future real analytics/AI service.</p>
+        <p className="mt-4 text-xs text-slate-500">Illustrative insights — architected for a future real analytics/AI service.</p>
       </div>
       </>
       )}

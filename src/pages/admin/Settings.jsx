@@ -17,7 +17,7 @@ export default function AdminSettings() {
   return (
     <div className="mx-auto max-w-2xl">
       <h1 className="font-display text-2xl font-semibold text-ink-900">Settings</h1>
-      <p className="mt-1 text-sm text-slate-500">Console preferences for this demo environment.</p>
+      <p className="mt-1 text-sm text-slate-500">Console preferences.</p>
 
       <form onSubmit={onSave} className="mt-6 space-y-6">
         <section className="rounded-2xl border border-mist-200 bg-white p-6">
@@ -38,7 +38,7 @@ export default function AdminSettings() {
 
         <section className="rounded-2xl border border-mist-200 bg-white p-6">
           <h2 className="flex items-center gap-2 font-display text-sm font-semibold text-ink-900"><Lock className="h-4 w-4 text-teal-600" /> Security</h2>
-          <p className="mt-2 text-sm text-slate-500">This prototype uses a demo authentication service. In production, this section would manage role-based access control, audit logs, and API credentials.</p>
+          <p className="mt-2 text-sm text-slate-500">Authentication is handled via JWT sessions. This section would eventually manage role-based access control, audit logs, and API credentials.</p>
         </section>
 
         <Button type="submit" icon={Save}>{saved ? 'Saved!' : 'Save settings'}</Button>

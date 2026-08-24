@@ -27,7 +27,7 @@ export default function Complaints() {
       <div className="mx-auto max-w-5xl px-5 pb-10 pt-6 text-center lg:px-8">
         <span className="text-xs font-semibold uppercase tracking-widest text-teal-600">Public Complaints</span>
         <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl">Browse community, government, and consumer complaints</h1>
-        <p className="mx-auto mt-3 max-w-xl text-sm text-slate-500">Aggregated demo data. Private reporter information is never shown publicly.</p>
+        <p className="mx-auto mt-3 max-w-xl text-sm text-slate-500">Private reporter information is never shown publicly.</p>
       </div>
 
       <div className="mx-auto max-w-5xl px-5 pb-20 lg:px-8">
