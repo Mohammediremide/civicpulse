@@ -1,0 +1,111 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@theme {
+  /* Brand */
+  --color-navy-950: #060e1e;
+  --color-navy-900: #0a1b33;
+  --color-navy-800: #122748;
+  --color-navy-700: #1a3560;
+  --color-navy-600: #24447a;
+
+  --color-blue-600: #1e5fe0;
+  --color-blue-500: #2f74f5;
+  --color-blue-400: #5c93f7;
+
+  --color-teal-600: #0e9c8f;
+  --color-teal-500: #14c7b5;
+  --color-teal-400: #4fdccc;
+
+  /* Neutrals */
+  --color-ink-900: #0b1220;
+  --color-ink-700: #263047;
+  --color-slate-600: #566072;
+  --color-slate-400: #8792a3;
+  --color-mist-200: #e3e8ef;
+  --color-mist-100: #eef1f6;
+  --color-mist-50: #f6f8fb;
+
+  /* Status */
+  --color-status-resolved: #17a34a;
+  --color-status-info: #2563eb;
+  --color-status-warning: #ca9500;
+  --color-status-high: #e0670f;
+  --color-status-critical: #d92d20;
+
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --animate-pulse-ring: pulse-ring 2.2s cubic-bezier(0.2, 0.7, 0.4, 1) infinite;
+  --animate-marker-drop: marker-drop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.5); opacity: 0.7; }
+  80% { transform: scale(2.4); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+@keyframes marker-drop {
+  0% { transform: translateY(-14px) scale(0.6); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink-900);
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-teal-500);
+  color: white;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-teal-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.font-display { font-family: var(--font-display); }
+.font-mono { font-family: var(--font-mono); }
+
+.grain-noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+.scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: var(--color-mist-200); border-radius: 999px; }
+
+/* skeleton shimmer */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-mist-100);
+}
+.skeleton::after {
+  content: "";
+  position: absolute; inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+  animation: shimmer 1.6s infinite;
+}
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
