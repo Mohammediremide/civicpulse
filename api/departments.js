@@ -1,8 +1,8 @@
 // Handles /api/departments (list, create) and /api/departments/:id
 // (update, delete) in one serverless function via an optional catch-all
 // route, to stay under Vercel Hobby's function-count limit.
-import { prisma } from '../../lib/prisma.js'
-import { getSessionFromRequest, sendError } from '../../lib/auth.js'
+import { prisma } from '../lib/prisma.js'
+import { getSessionFromRequest, sendError } from '../lib/auth.js'
 
 function requireAdmin(req) {
   const session = getSessionFromRequest(req)
@@ -11,9 +11,7 @@ function requireAdmin(req) {
 }
 
 function getId(req) {
-  const parts = req.query.id
-  if (!parts) return null
-  return Array.isArray(parts) ? parts[0] : parts
+  return req.query.id || null
 }
 
 export default async function handler(req, res) {

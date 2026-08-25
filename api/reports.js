@@ -1,9 +1,9 @@
 // Handles BOTH /api/reports (list, create) and /api/reports/:id (get, update)
 // in a single serverless function via Vercel's optional catch-all route
 // ([[...id]]) — keeps the total function count under the Hobby plan's limit.
-import { prisma } from '../../lib/prisma.js'
-import { getSessionFromRequest, sendError } from '../../lib/auth.js'
-import { classifyComplaint, nextReferenceId } from '../../lib/taxonomy.js'
+import { prisma } from '../lib/prisma.js'
+import { getSessionFromRequest, sendError } from '../lib/auth.js'
+import { classifyComplaint, nextReferenceId } from '../lib/taxonomy.js'
 
 const SELECT = {
   id: true, referenceId: true, title: true, description: true, typeId: true,
@@ -15,9 +15,7 @@ const SELECT = {
 }
 
 function getId(req) {
-  const parts = req.query.id
-  if (!parts) return null
-  return Array.isArray(parts) ? parts[0] : parts
+  return req.query.id || null
 }
 
 export default async function handler(req, res) {

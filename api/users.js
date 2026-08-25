@@ -1,7 +1,7 @@
 // Handles BOTH /api/users (list, create) and /api/users/:id (update) in one
 // serverless function via Vercel's optional catch-all route ([[...id]]).
-import { prisma } from '../../lib/prisma.js'
-import { getSessionFromRequest, hashPassword, sendError } from '../../lib/auth.js'
+import { prisma } from '../lib/prisma.js'
+import { getSessionFromRequest, hashPassword, sendError } from '../lib/auth.js'
 
 const SAFE_SELECT = {
   id: true, fullName: true, email: true, phone: true, role: true, suspended: true, createdAt: true,
@@ -15,9 +15,7 @@ function requireAdmin(req) {
 }
 
 function getId(req) {
-  const parts = req.query.id
-  if (!parts) return null
-  return Array.isArray(parts) ? parts[0] : parts
+  return req.query.id || null
 }
 
 export default async function handler(req, res) {

@@ -35,7 +35,7 @@ export async function getAllReports(filters = {}) {
 
 export async function getReport(refOrId) {
   try {
-    const data = await apiFetch(`/api/reports/${encodeURIComponent(refOrId)}`)
+    const data = await apiFetch('/api/reports', { params: { id: refOrId } })
     return normalize(data.report)
   } catch {
     return null
@@ -60,27 +60,27 @@ export async function submitReport(form) {
 
 // Admin actions
 export async function verifyReport(refOrId) {
-  const data = await apiFetch(`/api/reports/${encodeURIComponent(refOrId)}`, { method: 'PATCH', body: { status: 'Verified', note: 'Report verified by CivicPulse staff.' } })
+  const data = await apiFetch('/api/reports', { method: 'PATCH', params: { id: refOrId }, body: { status: 'Verified', note: 'Report verified by CivicPulse staff.' } })
   return normalize(data.report)
 }
 
 export async function assignDepartment(refOrId, department) {
-  const data = await apiFetch(`/api/reports/${encodeURIComponent(refOrId)}`, { method: 'PATCH', body: { department, status: 'Assigned', note: `Assigned to ${department}.` } })
+  const data = await apiFetch('/api/reports', { method: 'PATCH', params: { id: refOrId }, body: { department, status: 'Assigned', note: `Assigned to ${department}.` } })
   return normalize(data.report)
 }
 
 export async function changePriority(refOrId, priority) {
-  const data = await apiFetch(`/api/reports/${encodeURIComponent(refOrId)}`, { method: 'PATCH', body: { priority, note: `Priority set to ${priority}.` } })
+  const data = await apiFetch('/api/reports', { method: 'PATCH', params: { id: refOrId }, body: { priority, note: `Priority set to ${priority}.` } })
   return normalize(data.report)
 }
 
 export async function changeStatus(refOrId, status) {
-  const data = await apiFetch(`/api/reports/${encodeURIComponent(refOrId)}`, { method: 'PATCH', body: { status } })
+  const data = await apiFetch('/api/reports', { method: 'PATCH', params: { id: refOrId }, body: { status } })
   return normalize(data.report)
 }
 
 export async function addUpdateNote(refOrId, note) {
-  const data = await apiFetch(`/api/reports/${encodeURIComponent(refOrId)}`, { method: 'PATCH', body: { note } })
+  const data = await apiFetch('/api/reports', { method: 'PATCH', params: { id: refOrId }, body: { note } })
   return normalize(data.report)
 }
 

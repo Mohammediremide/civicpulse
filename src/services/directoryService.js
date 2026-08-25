@@ -11,12 +11,12 @@ export async function createDepartment(payload) {
 }
 
 export async function updateDepartment(id, patch) {
-  const data = await apiFetch(`/api/departments/${encodeURIComponent(id)}`, { method: 'PATCH', body: patch })
+  const data = await apiFetch('/api/departments', { method: 'PATCH', params: { id }, body: patch })
   return data.department
 }
 
 export async function deleteDepartment(id) {
-  return apiFetch(`/api/departments/${encodeURIComponent(id)}`, { method: 'DELETE' })
+  return apiFetch('/api/departments', { method: 'DELETE', params: { id } })
 }
 
 export async function listOrganizations() {
@@ -30,10 +30,10 @@ export async function createOrganization(payload) {
 }
 
 export async function updateOrganization(id, patch) {
-  const data = await apiFetch(`/api/organizations/${encodeURIComponent(id)}`, { method: 'PATCH', body: patch })
+  const data = await apiFetch('/api/organizations', { method: 'PATCH', params: { id }, body: patch })
   return data.organization
 }
 
 export async function deleteOrganization(id) {
-  return apiFetch(`/api/organizations/${encodeURIComponent(id)}`, { method: 'DELETE' })
+  return apiFetch('/api/organizations', { method: 'DELETE', params: { id } })
 }

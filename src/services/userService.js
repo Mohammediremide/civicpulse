@@ -11,7 +11,7 @@ export async function createUser(payload) {
 }
 
 export async function updateUser(id, patch) {
-  const data = await apiFetch(`/api/users/${encodeURIComponent(id)}`, { method: 'PATCH', body: patch })
+  const data = await apiFetch('/api/users', { method: 'PATCH', params: { id }, body: patch })
   return data.user
 }
 
