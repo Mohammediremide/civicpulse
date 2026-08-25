@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Landmark, ArrowUpRight, Plus, X } from 'lucide-react'
+import { Landmark, ArrowUpRight, Plus, X, Trash2 } from 'lucide-react'
 import { useReports } from '../../hooks/useReports'
-import { listDepartments, createDepartment } from '../../services/directoryService'
+import { listDepartments, createDepartment, deleteDepartment } from '../../services/directoryService'
 import { SkeletonCard } from '../../components/Skeleton'
 import ErrorState from '../../components/ErrorState'
 import FlipCard from '../../components/FlipCard'
@@ -15,6 +15,20 @@ export default function AdminDepartments() {
   const [deptLoading, setDeptLoading] = useState(true)
   const [deptError, setDeptError] = useState(null)
   const [showCreate, setShowCreate] = useState(false)
+  const [deletingId, setDeletingId] = useState(null)
+
+  const onDelete = async (dept) => {
+    if (!confirm(`Remove "${dept.name}"? Reports already assigned to it will keep the name but won't be re-assignable to it going forward.`)) return
+    setDeletingId(dept.id)
+    try {
+      await deleteDepartment(dept.id)
+      setDepartments((list) => list.filter((d) => d.id !== dept.id))
+    } catch (e) {
+      alert(e.message)
+    } finally {
+      setDeletingId(null)
+    }
+  }
 
   const loadDepartments = () => {
     setDeptLoading(true)
@@ -77,10 +91,18 @@ export default function AdminDepartments() {
                   <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-mist-100 text-navy-800">
                     <Landmark className="h-5 w-5" />
                   </div>
-                  <div className="min-w-0">
+                  <div className="min-w-0 flex-1">
                     <p className="truncate font-display text-sm font-semibold text-ink-900">{d.name}</p>
                     <p className="truncate text-xs text-slate-400">{d.lead || 'No lead assigned'}</p>
                   </div>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); onDelete(d) }}
+                    disabled={deletingId === d.id}
+                    className="shrink-0 rounded-lg p-1.5 text-slate-400 hover:bg-red-50 hover:text-status-critical disabled:opacity-40"
+                    aria-label={`Delete ${d.name}`}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
                 </div>
                 <div className="mt-4 grid grid-cols-3 gap-2 text-center">
                   <Metric label="Received" value={d.received} />

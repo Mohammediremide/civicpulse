@@ -9,20 +9,22 @@ import Logo from '../components/Logo'
 import { useAuth } from '../hooks/useAuth'
 
 const NAV = [
-  { to: '/admin', label: 'Dashboard', icon: LayoutGrid, end: true },
-  { to: '/admin/reports', label: 'Reports', icon: FileStack },
-  { to: '/admin/map', label: 'Map', icon: MapIcon },
-  { to: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
-  { to: '/admin/departments', label: 'Departments', icon: Landmark },
-  { to: '/admin/organizations', label: 'Organizations', icon: Building2 },
-  { to: '/admin/users', label: 'Users', icon: Users },
-  { to: '/admin/notifications', label: 'Notifications', icon: Bell },
-  { to: '/admin/settings', label: 'Settings', icon: Settings },
+  { to: '/admin', label: 'Dashboard', icon: LayoutGrid, end: true, roles: ['administrator', 'government_staff', 'department_manager'] },
+  { to: '/admin/reports', label: 'Reports', icon: FileStack, roles: ['administrator', 'government_staff', 'department_manager'] },
+  { to: '/admin/map', label: 'Map', icon: MapIcon, roles: ['administrator', 'government_staff', 'department_manager'] },
+  { to: '/admin/notifications', label: 'Notifications', icon: Bell, roles: ['administrator', 'government_staff', 'department_manager'] },
+  { to: '/admin/analytics', label: 'Analytics', icon: BarChart3, roles: ['administrator'] },
+  { to: '/admin/departments', label: 'Departments', icon: Landmark, roles: ['administrator'] },
+  { to: '/admin/organizations', label: 'Organizations', icon: Building2, roles: ['administrator'] },
+  { to: '/admin/users', label: 'Users', icon: Users, roles: ['administrator'] },
+  { to: '/admin/settings', label: 'Settings', icon: Settings, roles: ['administrator'] },
 ]
 
 export default function AdminLayout() {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const { session, logout } = useAuth()
+  const visibleNav = NAV.filter((item) => item.roles.includes(session?.role))
+  const isAdministrator = session?.role === 'administrator'
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -37,7 +39,7 @@ export default function AdminLayout() {
         <span className="ml-auto rounded-full bg-teal-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-teal-400">Admin</span>
       </div>
       <nav className="scrollbar-thin flex-1 space-y-1 overflow-y-auto px-3 py-4">
-        {NAV.map((item) => (
+        {visibleNav.map((item) => (
           <NavLink
             key={item.to}
             to={item.to}
@@ -96,7 +98,7 @@ export default function AdminLayout() {
           <button className="grid h-10 w-10 place-items-center rounded-lg hover:bg-mist-100 lg:hidden" onClick={() => setDrawerOpen(true)} aria-label="Open menu">
             <Menu className="h-5 w-5" />
           </button>
-          <span className="font-display text-sm font-semibold text-ink-900">Government Operations Console</span>
+          <span className="font-display text-sm font-semibold text-ink-900">{isAdministrator ? 'Government Operations Console' : 'Staff Console'}</span>
         </header>
         <main className="px-4 py-6 lg:px-8 lg:py-8">
           <Outlet />

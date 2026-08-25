@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Building2, ShieldAlert, Plus, X } from 'lucide-react'
-import { listOrganizations, createOrganization } from '../../services/directoryService'
+import { Building2, ShieldAlert, Plus, X, Trash2 } from 'lucide-react'
+import { listOrganizations, createOrganization, deleteOrganization } from '../../services/directoryService'
 import { useReports } from '../../hooks/useReports'
 import { SkeletonCard } from '../../components/Skeleton'
 import ErrorState from '../../components/ErrorState'
@@ -13,6 +13,20 @@ export default function AdminOrganizations() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [showCreate, setShowCreate] = useState(false)
+  const [deletingId, setDeletingId] = useState(null)
+
+  const onDelete = async (org) => {
+    if (!confirm(`Remove "${org.name}"?`)) return
+    setDeletingId(org.id)
+    try {
+      await deleteOrganization(org.id)
+      setOrganizations((list) => list.filter((o) => o.id !== org.id))
+    } catch (e) {
+      alert(e.message)
+    } finally {
+      setDeletingId(null)
+    }
+  }
 
   const load = () => {
     setLoading(true)
@@ -64,6 +78,7 @@ export default function AdminOrganizations() {
                 <th className="px-4 py-3 font-medium">Complaints</th>
                 <th className="px-4 py-3 font-medium">Active</th>
                 <th className="px-4 py-3 font-medium">Resolved</th>
+                <th className="px-4 py-3 font-medium text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -79,6 +94,15 @@ export default function AdminOrganizations() {
                   <td className="px-4 py-3.5 text-slate-500">{o.count}</td>
                   <td className="px-4 py-3.5 text-slate-500">{o.active}</td>
                   <td className="px-4 py-3.5 text-slate-500">{o.resolved}</td>
+                  <td className="px-4 py-3.5 text-right">
+                    <button
+                      onClick={() => onDelete(o)}
+                      disabled={deletingId === o.id}
+                      className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-status-critical hover:bg-red-50 disabled:opacity-40"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" /> Delete
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

@@ -8,6 +8,7 @@ import PublicLayout from './layouts/PublicLayout'
 import CitizenLayout from './layouts/CitizenLayout'
 import AdminLayout from './layouts/AdminLayout'
 import ProtectedRoute from './components/ProtectedRoute'
+import AdminOnlyGate from './components/AdminOnlyGate'
 import { SkeletonBlock } from './components/Skeleton'
 
 import Landing from './pages/public/Landing'
@@ -118,13 +119,13 @@ function AppShell() {
             <Route path="/admin/reports/:id" element={<AdminReportDetail />} />
             <Route path="/admin/map" element={<AdminMap />} />
             <Route path="/admin/analytics" element={
-              <Suspense fallback={<LazyFallback />}><AdminAnalytics /></Suspense>
+              <AdminOnlyGate><Suspense fallback={<LazyFallback />}><AdminAnalytics /></Suspense></AdminOnlyGate>
             } />
-            <Route path="/admin/departments" element={<AdminDepartments />} />
-            <Route path="/admin/organizations" element={<AdminOrganizations />} />
-            <Route path="/admin/users" element={<AdminUsers />} />
+            <Route path="/admin/departments" element={<AdminOnlyGate><AdminDepartments /></AdminOnlyGate>} />
+            <Route path="/admin/organizations" element={<AdminOnlyGate><AdminOrganizations /></AdminOnlyGate>} />
+            <Route path="/admin/users" element={<AdminOnlyGate><AdminUsers /></AdminOnlyGate>} />
             <Route path="/admin/notifications" element={<AdminNotifications />} />
-            <Route path="/admin/settings" element={<AdminSettings />} />
+            <Route path="/admin/settings" element={<AdminOnlyGate><AdminSettings /></AdminOnlyGate>} />
           </Route>
 
           <Route path="*" element={<NotFound />} />
